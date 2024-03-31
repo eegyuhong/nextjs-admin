@@ -1,27 +1,18 @@
-import { create, StateCreator } from 'zustand';
+import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-interface INavSlice {
-  collapsedNav: boolean;
-  showCollapsedNav: () => void;
-  hideCollapsedNav: () => void;
+interface ISidebarState {
+  collapsed: boolean;
+  toggleCollapsed: () => void;
 }
 
-const createCollapsedNavSlice: StateCreator<INavSlice> = (set, get) => ({
-  collapsedNav: false,
-  showCollapsedNav: () => {
-    if (!get().collapsedNav) set({ collapsedNav: true });
-  },
-  hideCollapsedNav: () => {
-    if (get().collapsedNav) set({ collapsedNav: false });
-  },
-});
-
 const NAME = 'collapsedStore';
-export const useCollapsedStore = create<INavSlice>()(
+export const useCollapsedStore = create<ISidebarState>()(
   devtools(
-    (...a) => ({
-      ...createCollapsedNavSlice(...a),
+    (set) => ({
+      collapsed: false,
+      toggleCollapsed: () =>
+        set(({ collapsed }) => ({ collapsed: !collapsed })),
     }),
     { name: NAME },
   ),

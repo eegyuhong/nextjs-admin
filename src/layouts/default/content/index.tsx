@@ -1,9 +1,12 @@
+'use client';
+
 import { Layout, theme } from 'antd';
 
 const { Content } = Layout;
 
 export default function LayoutContent(props: { children: React.ReactNode }) {
   const { colorBgContainer, borderRadiusLG } = theme.useToken().token;
+
   return (
     <Content
       style={{

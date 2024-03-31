@@ -1,14 +1,15 @@
+'use client';
+
+import { useCollapsedStore } from '@/store';
 import { Layout } from 'antd';
 import SidebarMenu from './components/Menu';
 import SidebarLogo from './components/Logo';
 
-interface Props {
-  collapsed: boolean;
-}
-
 const { Sider } = Layout;
 
-export default function LayoutSidebar({ collapsed }: Props) {
+export default function LayoutSidebar() {
+  const { collapsed } = useCollapsedStore();
+
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <SidebarLogo />
