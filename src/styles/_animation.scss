@@ -1,0 +1,78 @@
+@for $i from 1 through 10 {
+    * > .enter-x:nth-child(#{$i}) {
+      transform: translateX(50px);
+    }
+  
+    * > .-enter-x:nth-child(#{$i}) {
+      transform: translateX(-50px);
+    }
+  
+    * > .enter-y:nth-child(#{$i}) {
+      transform: translateY(50px);
+    }
+  
+    * > .-enter-y:nth-child(#{$i}) {
+      transform: translateY(-50px);
+    }
+  
+    * > .enter-x:nth-child(#{$i}),
+    * > .-enter-x:nth-child(#{$i}) {
+      animation: enter-x-animation 0.4s ease-in-out 0.3s;
+    }
+  
+    * > .enter-y:nth-child(#{$i}),
+    * > .-enter-y:nth-child(#{$i}) {
+      animation: enter-y-animation 0.4s ease-in-out 0.3s;
+    }
+  
+    * > .enter-x:nth-child(#{$i}),
+    * > .-enter-x:nth-child(#{$i}),
+    * > .enter-y:nth-child(#{$i}),
+    * > .-enter-y:nth-child(#{$i}) {
+      z-index: (10 - $i);
+      opacity: 0;
+      animation-fill-mode: forwards;
+      animation-delay: ($i * 1 * 0.1s);
+    }
+  };
+  
+  @keyframes enter-x-animation {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes enter-y-animation {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
+  
+  /* fade-slide */
+  .fade-slide-leave-active,
+  .fade-slide-enter-active {
+    transition: all 0.3s;
+  }
+  
+  .fade-slide-enter-from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  
+  .fade-slide-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  
