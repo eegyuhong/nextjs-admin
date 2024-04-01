@@ -1,3 +1,11 @@
+import { theme } from 'antd';
+
 export default function SidebarLogo() {
-  return <div className="h-8 m-4 rounded-md bg-slate-200 opacity-20"></div>;
+  const { colorBgContainer } = theme.useToken().token;
+
+  return (
+    <div style={{ background: colorBgContainer }} className="p-4">
+      <div className="h-8 rounded-md bg-slate-500 opacity-20"></div>
+    </div>
+  );
 }

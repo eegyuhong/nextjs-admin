@@ -31,7 +31,6 @@ export default function SidebarMenu() {
 
   return (
     <Menu
-      theme="dark"
       mode="inline"
       defaultSelectedKeys={[path]}
       openKeys={openKeys}
@@ -39,6 +38,7 @@ export default function SidebarMenu() {
         setOpenKeys(keys);
       }}
       items={items}
+      style={{ height: '100vh', border: 'none' }}
     />
   );
 }
