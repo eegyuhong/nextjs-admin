@@ -3,6 +3,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Menu, MenuProps } from 'antd';
 import { sideMenu, ISideMenu } from '@/common/menu';
+import { getPathArray } from '@/utils/path';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -24,13 +25,9 @@ function getItem(menu: ISideMenu[], parenKey?: string): MenuItem[] {
 export default function SidebarMenu() {
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const path = usePathname();
+  const pathArr = getPathArray(path);
 
-  const keys = path.split('/').reduce((pre: string[], cur) => {
-    cur && pre.push(pre + '/' + cur);
-    return pre;
-  }, []);
-
-  useEffect(() => setOpenKeys(keys), []);
+  useEffect(() => setOpenKeys(pathArr), []);
 
   return (
     <Menu

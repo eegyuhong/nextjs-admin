@@ -13,8 +13,8 @@ export interface ISideMenu {
 
 export const sideMenu: ISideMenu[] = [
   {
-    label: '홈',
-    path: '/',
+    label: 'about',
+    path: '/about',
     icon: AppstoreOutlined,
   },
   {
@@ -23,19 +23,19 @@ export const sideMenu: ISideMenu[] = [
     icon: ContainerOutlined,
     children: [
       {
-        label: '1',
+        label: 'test1_1',
         path: '/test1_1',
       },
       {
-        label: '2',
+        label: 'test1_2',
         path: '/test1_2',
         children: [
           {
-            label: '1',
+            label: 'test1_2_1',
             path: '/test1_2_1',
           },
           {
-            label: '2',
+            label: 'test1_2_2',
             path: '/test1_2_2',
           },
         ],
