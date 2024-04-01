@@ -4,14 +4,14 @@ import {
   PieChartOutlined,
 } from '@ant-design/icons';
 
-export interface ISideMenu {
+export interface SideMenu {
   label: string;
   path: string;
   icon?: React.ForwardRefExoticComponent<any>;
-  children?: ISideMenu[];
+  children?: SideMenu[];
 }
 
-export const sideMenu: ISideMenu[] = [
+export const sideMenu: SideMenu[] = [
   {
     label: 'about',
     path: '/about',

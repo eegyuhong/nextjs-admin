@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Menu, MenuProps } from 'antd';
-import { sideMenu, ISideMenu } from '@/common/menu';
+import { sideMenu, SideMenu } from '@/common/menu';
 import { getPathArray } from '@/utils/path';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 const items = getItem(sideMenu);
 
-function getItem(menu: ISideMenu[], parenKey?: string): MenuItem[] {
+function getItem(menu: SideMenu[], parenKey?: string): MenuItem[] {
   return menu.map(({ path, label, icon: Icon, children }) => {
     const key = parenKey ? parenKey + path : path;
 

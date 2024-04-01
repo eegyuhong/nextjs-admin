@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-interface ISidebarState {
+interface SidebarState {
   collapsed: boolean;
   toggleCollapsed: () => void;
 }
 
 const NAME = 'collapsedStore';
-export const useCollapsedStore = create<ISidebarState>()(
+export const useCollapsedStore = create<SidebarState>()(
   devtools(
     (set) => ({
       collapsed: false,

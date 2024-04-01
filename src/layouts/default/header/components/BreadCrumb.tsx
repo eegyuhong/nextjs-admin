@@ -1,6 +1,6 @@
 import { Breadcrumb } from 'antd';
 import { usePathname } from 'next/navigation';
-import { sideMenu, ISideMenu } from '@/common/menu';
+import { sideMenu, SideMenu } from '@/common/menu';
 import { getPathArray } from '@/utils/path';
 
 export default function BreadCrumb() {
@@ -8,7 +8,7 @@ export default function BreadCrumb() {
   const pathArr = getPathArray(path);
   const items = getItem(pathArr, sideMenu);
 
-  function getItem(pathArr: string[], menu: ISideMenu[]) {
+  function getItem(pathArr: string[], menu: SideMenu[]) {
     const result = [];
     let parent = [...menu];
 
