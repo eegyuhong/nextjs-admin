@@ -6,9 +6,9 @@ import LayoutFooter from './footer';
 
 export default function DefaultLayout(props: { children: React.ReactNode }) {
   return (
-    <Layout>
+    <Layout style={{ minHeight: '100vh' }}>
       <LayoutSidebar />
-      <Layout style={{ minHeight: '100vh' }}>
+      <Layout>
         <LayoutHeader />
         <LayoutContent>{props.children}</LayoutContent>
         <LayoutFooter />
