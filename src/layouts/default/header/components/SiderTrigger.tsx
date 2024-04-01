@@ -1,5 +1,3 @@
-'use client';
-
 import { useCollapsedStore } from '@/store';
 import { Button } from 'antd';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
