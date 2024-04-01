@@ -1,34 +1,21 @@
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Menu, MenuProps } from 'antd';
 import { sideMenu, ISideMenu } from '@/common/menu';
 
 type MenuItem = Required<MenuProps>['items'][number];
-type IconModules = { [key: string]: any };
 
 const items = getItem(sideMenu);
 
-function getDynamicIcon(icon?: string) {
-  if (!icon) return undefined;
-
-  const DynamicIcon = dynamic(async () => {
-    const res = (await import('@ant-design/icons')) as IconModules;
-    return res[icon];
-  });
-
-  return <DynamicIcon />;
-}
-
 function getItem(menu: ISideMenu[], parenKey?: string): MenuItem[] {
-  return menu.map(({ path, label, icon, children }) => {
+  return menu.map(({ path, label, icon: Icon, children }) => {
     const key = parenKey ? parenKey + path : path;
 
     return {
       key,
       label: children ? label : <Link href={key}>{label}</Link>,
-      icon: getDynamicIcon(icon),
+      icon: Icon ? <Icon /> : undefined,
       children: children && getItem(children, key),
     };
   });

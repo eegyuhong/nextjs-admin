@@ -1,7 +1,13 @@
+import {
+  AppstoreOutlined,
+  ContainerOutlined,
+  PieChartOutlined,
+} from '@ant-design/icons';
+
 export interface ISideMenu {
   label: string;
   path: string;
-  icon?: string;
+  icon?: React.ForwardRefExoticComponent<any>;
   children?: ISideMenu[];
 }
 
@@ -9,12 +15,12 @@ export const sideMenu: ISideMenu[] = [
   {
     label: '홈',
     path: '/',
-    icon: 'AppstoreOutlined',
+    icon: AppstoreOutlined,
   },
   {
     label: '테스트1',
     path: '/test1',
-    icon: 'ContainerOutlined',
+    icon: ContainerOutlined,
     children: [
       {
         label: '1',
@@ -39,6 +45,6 @@ export const sideMenu: ISideMenu[] = [
   {
     label: '테스트2',
     path: '/test2',
-    icon: 'PieChartOutlined',
+    icon: PieChartOutlined,
   },
 ];
