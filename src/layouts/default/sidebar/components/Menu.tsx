@@ -38,7 +38,7 @@ export default function SidebarMenu() {
         setOpenKeys(keys);
       }}
       items={items}
-      style={{ height: '100vh', border: 'none' }}
+      style={{ height: 'calc(100vh - 64px)', border: 'none' }}
     />
   );
 }
