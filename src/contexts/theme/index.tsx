@@ -24,7 +24,9 @@ const ThemeContext = createContext<{
 export const ThemeProvider: FC<{ children: ReactNode }> = (props) => {
   const [data, dispatch] = useReducer<ThemeReducer>(themeReducer, {
     darkModeStatus:
-      (localStorage.getItem('theme') as DarkModeStatus) ?? 'light',
+      typeof window !== 'undefined'
+        ? (localStorage.getItem('theme') as DarkModeStatus) ?? 'light'
+        : 'light',
     collapsedSidebar: false,
   });
 
