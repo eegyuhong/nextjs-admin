@@ -1,19 +1,30 @@
 'use client';
 
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, FormProps, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { signIn } from 'next-auth/react';
+
+type FieldType = {
+  eamil?: string;
+  password?: string;
+  remember?: string;
+};
 
 const { Item } = Form;
 const { Password } = Input;
 
 export default function LonginForm() {
+  const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
+    signIn('credentials', { values });
+  };
+
   return (
-    <Form className="w-[400px]" size="large">
+    <Form className="w-[400px]" size="large" onFinish={onFinish}>
       <Item
-        name="username"
-        rules={[{ required: true, message: '아이디를 확인하세요' }]}
+        name="eamil"
+        rules={[{ required: true, message: '이메일 주소를 확인하세요' }]}
       >
-        <Input prefix={<UserOutlined />} placeholder="아이디 입력" />
+        <Input prefix={<UserOutlined />} placeholder="이메일 주소 입력" />
       </Item>
       <Item
         name="password"
