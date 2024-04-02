@@ -11,6 +11,9 @@ export const changeDarkModeStatus = (
     ...oldState,
     darkModeStatus: status,
   };
+
+  localStorage.setItem('theme', status);
+
   return newState;
 };
 

@@ -8,7 +8,13 @@ import {
   useContext,
   useReducer,
 } from 'react';
-import { ThemeAction, ThemeReducer, ThemeState, themeReducer } from './reducer';
+import {
+  DarkModeStatus,
+  ThemeAction,
+  ThemeReducer,
+  ThemeState,
+  themeReducer,
+} from './reducer';
 
 const ThemeContext = createContext<{
   data: ThemeState;
@@ -17,7 +23,8 @@ const ThemeContext = createContext<{
 
 export const ThemeProvider: FC<{ children: ReactNode }> = (props) => {
   const [data, dispatch] = useReducer<ThemeReducer>(themeReducer, {
-    darkModeStatus: 'light',
+    darkModeStatus:
+      (localStorage.getItem('theme') as DarkModeStatus) ?? 'light',
     collapsedSidebar: false,
   });
 

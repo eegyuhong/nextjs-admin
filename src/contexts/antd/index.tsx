@@ -9,15 +9,23 @@ const { darkAlgorithm, defaultAlgorithm } = theme;
 export default function AntdConfigProvider(props: {
   children: React.ReactNode;
 }) {
-  const { data } = useTheme();
-  const { darkModeStatus } = data;
+  const {
+    data: { darkModeStatus },
+  } = useTheme();
+
+  const isDarkMode =
+    darkModeStatus === 'dark' ||
+    (darkModeStatus === 'system' &&
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ? true
+      : false;
 
   return (
     <AntdRegistry>
       <ConfigProvider
         theme={{
-          algorithm:
-            darkModeStatus === 'dark' ? darkAlgorithm : defaultAlgorithm,
+          algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
         }}
       >
         {props.children}

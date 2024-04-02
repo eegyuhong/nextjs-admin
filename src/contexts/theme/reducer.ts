@@ -1,6 +1,6 @@
 import { changeCollapsedsideBar, changeDarkModeStatus } from './actions';
 
-export type DarkModeStatus = 'dark' | 'light';
+export type DarkModeStatus = 'light' | 'dark' | 'system';
 
 export interface ThemeState {
   darkModeStatus: DarkModeStatus;
