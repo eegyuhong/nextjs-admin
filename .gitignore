@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+/data
 .pnp.js
 .yarn/install-state.gz
 
@@ -27,9 +28,13 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
+
+# docker
+docker-compose.yml
 
 # typescript
 *.tsbuildinfo
