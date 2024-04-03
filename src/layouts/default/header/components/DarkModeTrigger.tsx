@@ -47,7 +47,7 @@ export default function DarkModeTrigger() {
   };
 
   return (
-    <Dropdown menu={{ items, onClick }} placement="bottomLeft">
+    <Dropdown menu={{ items, onClick }} placement="bottomRight">
       <Button
         type="text"
         style={{

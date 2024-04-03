@@ -1,7 +1,5 @@
 import { NextAuthOptions } from 'next-auth';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-// import GitHubProvider from 'next-auth/providers/github';
-// import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
@@ -9,20 +7,6 @@ import bcrypt from 'bcryptjs';
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
-    // GitHubProvider({
-    //   clientId: process.env.GITHUB_CLIENT_ID as string,
-    //   clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-    //   httpOptions: {
-    //     timeout: 10000,
-    //   },
-    // }),
-    // GoogleProvider({
-    //   clientId: process.env.GOOGLE_CLIENT_ID as string,
-    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    //   httpOptions: {
-    //     timeout: 10000,
-    //   },
-    // }),
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
@@ -36,13 +20,15 @@ export const authOptions: NextAuthOptions = {
         }
 
         const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
+          where: { email: credentials.email },
         });
 
-        if (!user || !user?.hashedPassword) {
-          // 유저가 없거나 || oauth 유저
+        if (
+          !user ||
+          !user?.hashedPassword ||
+          (user?.userType as unknown as string) !== 'Admin'
+        ) {
+          // 유저가 없거나 || 유저타입이 admin이 아닌경우
           throw new Error('Invalid credentials');
         }
 
@@ -51,9 +37,7 @@ export const authOptions: NextAuthOptions = {
           user.hashedPassword,
         );
 
-        if (!isCorrectPassword) {
-          throw new Error('Invalid credentials');
-        }
+        if (!isCorrectPassword) throw new Error('Invalid credentials');
 
         return user;
       },
