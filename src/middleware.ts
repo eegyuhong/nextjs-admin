@@ -5,9 +5,20 @@ export { default } from 'next-auth/middleware';
 
 // export const config = { matcher: ['/admin/:path*', '/user'] };
 
+const PUBLIC_FILE = /\.(.*)$/;
+
 export async function middleware(req: NextRequest) {
   const session = await getToken({ req, secret: process.env.JWT_SECRET });
   const { pathname } = req.nextUrl;
+
+  if (
+    pathname.startsWith('/_next') || // exclude Next.js internals
+    pathname.startsWith('/api') || //  exclude all API routes
+    pathname.startsWith('/static') || // exclude static files
+    pathname.includes('.') || // exclude all files in the public folder
+    PUBLIC_FILE.test(pathname)
+  )
+    return NextResponse.next();
 
   // 로그인만
   if (!pathname.startsWith('/auth') && !session) {
